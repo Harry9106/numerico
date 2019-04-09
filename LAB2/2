@@ -1,0 +1,37 @@
+function rbisec(fun, I, err, mit)
+	a = I[1]
+	b = I[2]
+	fa = fun(a)
+	fb = fun(b)
+	hx = Real[]
+	hf = Real[]
+    if (fa*fb > 0)
+    	error("No real root in [a,b]")
+    end
+    i = 0
+    local c
+    while (b-a > err) || (i < mit)
+        i += 1
+        c = (a+b)/2
+        push!(hx, c)
+        fc = fun(c)
+        push!(hf, fc)
+        if fc == 0
+            break
+        elseif fa*fc > 0
+            a = c
+            fa = fc
+        else
+            b = c
+        end
+    end
+    return hx, hf
+end
+
+function fun_lab2ej2a(x)
+	return x^3 - x - 2
+end
+
+function fun_lab2ej2b(x)
+	return x^2-3
+end

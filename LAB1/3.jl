@@ -77,7 +77,7 @@ end
 
 function buena(a,b,c::Real)
 	dis = (b^2)-4*a*c
-	if b>0
+	if (b>0)
 		println("b>0")
 		x1 = (-b-sqrt(dis))/2*a
 		println(x1)
@@ -96,4 +96,13 @@ function buena(a,b,c::Real)
 		end
 	end
 	return x1, x2
+end
+
+function horn(coefs, x::Real)
+	maxExp = length(coefs)
+	h = coefs[1]
+	for i = 2:maxExp
+		h = h * x + coefs[i]
+	end
+	return h
 end
