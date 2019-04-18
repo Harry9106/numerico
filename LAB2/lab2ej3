@@ -1,0 +1,27 @@
+function rnewton(fun, x0, err, mit)
+	hx = Real[]
+	hf = Real[]
+	a = fun(x0)
+	fx = a[1]
+	push!(hf, fx) 
+	dfx = a[2]
+	h = fx/dfx
+	x = x0
+	push!(hx, x)
+	local i = 0
+	while (fx >= err) && (i < mit)
+		i += 1
+		h = fx/dfx
+		x = x - h
+		push!(hx, x)
+		aux = fun(x)
+		fx = aux[1]
+		push!(hf, fx)
+		dfx = aux[2]
+	end
+	return hx, hf
+end
+
+function fun(x)
+	return x^2-2, 2x
+end
