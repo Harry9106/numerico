@@ -1,0 +1,25 @@
+function inewton(x, y, z)
+	n = length(y)-1
+	a1 = Real[]
+	
+	for h = 1:n
+		coef = (y[h+1]-y[h])/(x[h+1]-x[h])
+		push!(a1, coef)
+	end
+
+	println(a1)
+
+	for a = 1:n
+
+		for	b = n:-1:a
+			coef = (a1[b]-a1[b-1])/(x[b+a]-x[b-1])
+			println(coef)
+			a1[b] = coef
+		end
+
+		n = n - 1
+
+	end
+
+	return a1
+end
