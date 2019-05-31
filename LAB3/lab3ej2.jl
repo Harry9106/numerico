@@ -1,6 +1,7 @@
 function inewton(x, y, z)
 	n = length(y)
 	m = zeros(n,n)
+	w = zeros(length(z))
 
 	for h=1:n
 		m[h,1] = y[h]
@@ -18,18 +19,23 @@ function inewton(x, y, z)
 		end
 	end
 
-	p = m[1,1]
-	c = zeros(n)
-	c[2] = z - x[1]
 
-	for h=3:n
-		c[h] = c[h-1]*(z-x[h-1])
+	for i = 1:length(z)
+		p = m[1,1]
+		c = zeros(n)
+		c[2] = z[i] - x[1]
+
+		for h=3:n
+			c[h] = c[h-1]*(z[i]-x[h-1])
+		end
+
+		for h=2:n
+			p = p + m[1,h] * c[h]
+		end
+
+		w[i] = p
 	end
 
-	for h=2:n
-		p = p + m[1,h] * c[h]
-	end
-
-	return p
+	return w
 end
 
