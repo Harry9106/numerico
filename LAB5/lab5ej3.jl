@@ -1,3 +1,20 @@
+function senint()
+	x = 0:0.5:2*pi
+	y =	zeros(13)
+	ys = zeros(13)
+	for i=1:13
+		ys[i] = sin(x[i])
+		N = ceil(x[i]/0.1)
+		y[i] = intenumcomp(fun,0,x[i],N,"trapecio")
+	end
+	plot(x,y)
+	plot!(x,ys)
+end
+
+function fun(x)
+	return cos(x)
+end
+
 function intenumcomp(fun,a,b,N,regla)
 	if regla == "trapecio"
 		h = (b-a)/N
@@ -34,13 +51,4 @@ function intenumcomp(fun,a,b,N,regla)
 		end
 		return res * h/3
 	end
-end
-
-function a(x)
-	return MathConstants.e ^ (-x)
-end
-
-
-function a(x)
-	return 3*x
 end
