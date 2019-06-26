@@ -8,28 +8,27 @@ function rbisec(fun, I, err, mit)
     if (fa*fb > 0)
     	error("No real root in [a,b]")
     end
-    i = 0
+    k = 0
     local c
-    while (b-a > err) || (i < mit)
-        i += 1
-        c = (a+b)/2
-        push!(hx, c)
-        fc = fun(c)
-        push!(hf, fc)
-        if fc == 0
+    while (k < mit)
+        k += 1
+        xk = (a+b)/2
+        push!(hx, xk)
+        fxk = fun(xk)
+        push!(hf, fxk)
+        if (abs(fxk) < err)
             break
-        elseif fa*fc > 0
-            a = c
-            fa = fc
+        elseif (fa*fxk > 0)
+            a = xk
         else
-            b = c
+            b = xk
         end
     end
-    return hx, hf
+    return hx, hf, k
 end
 
 function fun_lab2ej2a(x)
-	return x^3 - x - 2
+	return tan(x)/2
 end
 
 function fun_lab2ej2b(x)

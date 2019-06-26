@@ -9,7 +9,7 @@ function rnewton(fun, x0, err, mit)
 	x = x0
 	push!(hx, x)
 	local i = 0
-	while (fx >= err) && (i < mit)
+	while (abs(fx) >= err) && (i < mit)
 		i += 1
 		h = fx/dfx
 		x = x - h
@@ -19,9 +19,9 @@ function rnewton(fun, x0, err, mit)
 		push!(hf, fx)
 		dfx = aux[2]
 	end
-	return hx, hf
+	return hx, hf, i
 end
 
 function fun(x)
-	return x^2-2, 2x
+	return x^2-2, 2*x
 end
